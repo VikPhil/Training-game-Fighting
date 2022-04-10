@@ -11,7 +11,7 @@ public enum Constants {
     KICK_LEG_1(1),
     KICK_LEG_2(2);
 
-    private final int volume;
+    private int volume;
     Constants(int volume) {
         this.volume = volume;
     }

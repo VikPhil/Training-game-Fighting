@@ -5,6 +5,8 @@ import main.GamePanel;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import static config.Move.*;
+
 public class KeyboardInputs implements KeyListener {
 
     private GamePanel gamePanel;
@@ -20,23 +22,20 @@ public class KeyboardInputs implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
-                // вверх
-                gamePanel.moveY(-5);
+                gamePanel.getGame().getPlayer().setJump(true);
                 break;
             case KeyEvent.VK_S:
-                // вниз
-                gamePanel.moveY(5);
+                gamePanel.getGame().getPlayer().setDown(true);
                 break;
             case KeyEvent.VK_A:
-                // влево
-                gamePanel.moveX(-5);
+                gamePanel.getGame().getPlayer().setLeft(true);
                 break;
             case KeyEvent.VK_D:
-                // вправо
-                gamePanel.moveX(5);
+                gamePanel.getGame().getPlayer().setRight(true);
                 break;
             case KeyEvent.VK_U:
                 // удар рукой
+                gamePanel.getGame().getPlayer().setAttacking(true);
                 break;
             case KeyEvent.VK_J:
                 // удар рукойAlt
@@ -56,6 +55,19 @@ public class KeyboardInputs implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_W:
+                gamePanel.getGame().getPlayer().setJump(false);
+                break;
+            case KeyEvent.VK_S:
+                gamePanel.getGame().getPlayer().setDown(false);
+                break;
+            case KeyEvent.VK_A:
+                gamePanel.getGame().getPlayer().setLeft(false);
+                break;
+            case KeyEvent.VK_D:
+                gamePanel.getGame().getPlayer().setRight(false);
+                break;
+        }
     }
 }
