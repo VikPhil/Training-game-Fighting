@@ -1,10 +1,12 @@
 package main;
 
+import config.DefaultValues;
 import entities.Player;
+import levels.LevelManager;
 
 import java.awt.*;
 
-public class Game implements Runnable {
+public class Game implements Runnable, DefaultValues {
 
     private GameWindow gameWindow;
     private GamePanel gamePanel;
@@ -12,6 +14,7 @@ public class Game implements Runnable {
     private final int FPS = 120;
     private final int UPS = 200;
 
+    private LevelManager levelManager;
     private Player player;
 
     public Game() {
@@ -23,7 +26,8 @@ public class Game implements Runnable {
     }
 
     private void initialisationClasses() {
-        player = new Player(50, 300);
+        levelManager = new LevelManager(this);
+        player = new Player( DEFAULT_POSITION_LEFT, FLOOR_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT);
     }
 
     private void startLoop() {
@@ -31,11 +35,14 @@ public class Game implements Runnable {
         thread.start();
     }
 
-    public void gameUpdate() {
+    public void gameUpdate()
+    {
+        levelManager.update();
         player.update();
     }
 
     public void gameRender(Graphics g) {
+        levelManager.draw(g);
         player.render(g);
     }
 

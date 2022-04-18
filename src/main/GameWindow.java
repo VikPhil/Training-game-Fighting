@@ -1,20 +1,22 @@
 package main;
 
+import config.DefaultValues;
+
 import javax.swing.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 
-public class GameWindow {
+public class GameWindow implements DefaultValues {
 
     private JFrame jFrame;
     public GameWindow(GamePanel gamePanel) {
         jFrame = new JFrame();
 
-        jFrame.setSize(1024, 600);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setLocationRelativeTo(null);
-        //jFrame.setResizable(false);
         jFrame.add(gamePanel);
+        jFrame.setResizable(false);
+        jFrame.pack();
+        jFrame.setLocationRelativeTo(null);
         jFrame.setVisible(true);
         jFrame.addWindowFocusListener(new WindowFocusListener() {
             @Override
